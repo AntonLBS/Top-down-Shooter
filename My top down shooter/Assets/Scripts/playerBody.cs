@@ -15,8 +15,11 @@ public class platerBody : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 dir = (player.position - transform.position);
-        rb.MovePosition(rb.position + dir);
+        if (player != null)
+        {
+            Vector2 dir = (player.position - transform.position);
+            rb.MovePosition(rb.position + dir);
+        }
     }
 }
 
