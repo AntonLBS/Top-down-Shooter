@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -8455354109363318379}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   moveSpeed: 10
-  bulletSpeed: 5
+  bulletSpeed: 15
   rotationSpeed: 700
   Bullet: {fileID: 6305719602671397334, guid: 5c806238b0de4e04ea630f42db50de10, type: 3}
   Gun: {fileID: 2531452615491351416}

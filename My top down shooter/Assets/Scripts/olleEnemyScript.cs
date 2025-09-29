@@ -1,12 +1,11 @@
 using UnityEngine;
 
-public class enemyMovement : MonoBehaviour
+public class olleEnemyScript : MonoBehaviour
 {
     Rigidbody2D rb;
-    [SerializeField] float moveSpeed = 3f;
+    [SerializeField] float olleSpeed = 1.0f;
+    [SerializeField] int olleHealth = 5;
     Transform player;
-
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,17 +19,23 @@ public class enemyMovement : MonoBehaviour
         if (player != null)
         {
             Vector2 dir = (player.position - transform.position).normalized;
-            rb.MovePosition(rb.position + dir * moveSpeed * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + dir * olleSpeed * Time.fixedDeltaTime);
         }
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            Destroy(gameObject);
+            if (olleHealth <= 1)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                olleHealth--;
+                Debug.Log("olle health: " + olleHealth);
+            }
         }
     }
 }
-

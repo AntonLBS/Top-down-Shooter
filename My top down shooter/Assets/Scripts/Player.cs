@@ -1,15 +1,21 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
     Rigidbody2D rb;
     Vector2 moveInput;
+    Vector2 screenBounduary;
+    bool invinsible = false;
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float bulletSpeed = 10f;
     [SerializeField] float rotationSpeed = 700f;
     [SerializeField] GameObject Bullet;
     [SerializeField] GameObject Gun;
+    [SerializeField] int playerHealth = 5;
+    [SerializeField] float invinsibleTime = 2.5f;
+
 
     float targetAngle;
 
@@ -17,6 +23,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        screenBounduary = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
     }
 
     private void OnMove(InputValue Value)
@@ -38,6 +45,8 @@ public class Player : MonoBehaviour
         {
             targetAngle = Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg;
         }
+        transform.position = new Vector2(Mathf.Clamp(transform.position.x, -screenBounduary.x, screenBounduary.x)
+                                       , Mathf.Clamp(transform.position.y, -screenBounduary.y, screenBounduary.y));
 
     }
 
@@ -47,11 +56,33 @@ public class Player : MonoBehaviour
         rb.MoveRotation(rotation);
     }
 
+    void ResetInvinsibility()
+    {
+        invinsible = false;
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") && !invinsible)
         {
-            Destroy(gameObject);
+            if (playerHealth <= 1)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                playerHealth--;
+                invinsible = true;
+                Invoke("ResetInvinsibility", invinsibleTime);
+                Debug.Log("Player health: " + playerHealth);
+            }
+
+        }
+        else if (collision.gameObject.CompareTag("Upgrade"))
+        {
+            Destroy(collision.gameObject);
+            
+            Rigidbody2D playerBullet = Instantiate(Bullet, Gun.transform.position, transform.rotation).GetComponent<Rigidbody2D>();
+            playerBullet.AddForce(transform.up * (bulletSpeed + moveSpeed), ForceMode2D.Impulse);
         }
     }
 }
