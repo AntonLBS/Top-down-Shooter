@@ -676,10 +676,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Olle
       objectReference: {fileID: 0}
-    - target: {fileID: 7515362235068006006, guid: 54428e64fe1e0f5478e9b334a1fdd718, type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8035216128794374213, guid: 54428e64fe1e0f5478e9b334a1fdd718, type: 3}
       propertyPath: m_FlipX
       value: 0
