@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     Vector2 moveInput;
     Vector2 screenBounduary;
     bool invinsible = false;
+    int upgradeBullets = 0;
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float bulletSpeed = 10f;
     [SerializeField] float rotationSpeed = 700f;
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject Gun;
     [SerializeField] int playerHealth = 5;
     [SerializeField] float invinsibleTime = 2.5f;
+    [SerializeField] float upgradeShootTime = 0.1f;
 
 
     float targetAngle;
@@ -80,9 +82,20 @@ public class Player : MonoBehaviour
         else if (collision.gameObject.CompareTag("Upgrade"))
         {
             Destroy(collision.gameObject);
-            
-            Rigidbody2D playerBullet = Instantiate(Bullet, Gun.transform.position, transform.rotation).GetComponent<Rigidbody2D>();
-            playerBullet.AddForce(transform.up * (bulletSpeed + moveSpeed), ForceMode2D.Impulse);
+            upgrade();
         }
     }
+
+    void upgrade()
+    {
+        Rigidbody2D playerBullet = Instantiate(Bullet, Gun.transform.position, transform.rotation).GetComponent<Rigidbody2D>();
+        playerBullet.AddForce(transform.up * (bulletSpeed + moveSpeed), ForceMode2D.Impulse);
+        if (upgradeBullets != 100)
+        {
+            upgradeBullets++;
+            Invoke("upgrade", upgradeShootTime);
+        }
+
+    }
 }
+

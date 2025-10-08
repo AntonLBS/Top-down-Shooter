@@ -19,6 +19,7 @@ public class enemySpawn : MonoBehaviour
     {
         spawnEnemy();
         spawnOlle();
+        spawnUpgrade();
     }
 
     // Update is called once per frame
@@ -77,5 +78,14 @@ public class enemySpawn : MonoBehaviour
         }
         Instantiate(ollePrefab, spawnPos, transform.rotation);
         Invoke("spawnOlle", spawnTime);
+    }
+
+    void spawnUpgrade()
+    {
+        float spawnTime = Random.Range(minSpawnTime, maxSpawnTime);
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+        spawnPos = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y + spawnDistance);  
+        Instantiate(playerUpgradePrefab, spawnPos, transform.rotation);
+        Invoke("spawnEnemy", spawnTime);
     }
 }
