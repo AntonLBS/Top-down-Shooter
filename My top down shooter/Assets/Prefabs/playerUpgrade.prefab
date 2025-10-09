@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8174372106854965148}
   - component: {fileID: 5804294711116562554}
   - component: {fileID: 8349969275731604047}
+  - component: {fileID: -5791225733712094428}
   m_Layer: 0
   m_Name: playerUpgrade
   m_TagString: Upgrade
@@ -108,7 +109,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -153,7 +154,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 0.1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -165,3 +166,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-5791225733712094428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7387239815639352545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc83e1a492e88db4881f5eec6ba222b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::upgradeDespawn

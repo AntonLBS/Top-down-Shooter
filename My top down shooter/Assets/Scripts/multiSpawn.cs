@@ -4,6 +4,7 @@ public class enemySpawn : MonoBehaviour
 {
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] GameObject ollePrefab;
+    [SerializeField] GameObject upgradePrefab;
     [SerializeField] float minSpawnTime = 1.0f;
     [SerializeField] float maxSpawnTime = 3.0f;
     [SerializeField] float minOlleSpawnTime = 1.0f;
@@ -85,7 +86,7 @@ public class enemySpawn : MonoBehaviour
         float spawnTime = Random.Range(minSpawnTime, maxSpawnTime);
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
         spawnPos = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y + spawnDistance);  
-        Instantiate(playerUpgradePrefab, spawnPos, transform.rotation);
-        Invoke("spawnEnemy", spawnTime);
+        Instantiate(upgradePrefab, spawnPos, transform.rotation);
+        Invoke("spawnUpgrade", spawnTime);
     }
 }

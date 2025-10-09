@@ -441,6 +441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   enemyPrefab: {fileID: 6100516446133488726, guid: 575caffcc985a074b8acee57aaa94339, type: 3}
   ollePrefab: {fileID: 6300423917747656501, guid: 54428e64fe1e0f5478e9b334a1fdd718, type: 3}
+  upgradePrefab: {fileID: 7387239815639352545, guid: 40d9f57cb53f6d54189b76a0cf2ff506, type: 3}
   minSpawnTime: 1
   maxSpawnTime: 3
   minOlleSpawnTime: 10
