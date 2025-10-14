@@ -142,6 +142,7 @@ MonoBehaviour:
   playerHealth: 5
   invinsibleTime: 2.5
   upgradeShootTime: 0.1
+  cheatMode: 0
 --- !u!114 &5049514628408679518
 MonoBehaviour:
   m_ObjectHideFlags: 0

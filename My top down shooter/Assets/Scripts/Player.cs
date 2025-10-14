@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -17,6 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField] int playerHealth = 5;
     [SerializeField] float invinsibleTime = 2.5f;
     [SerializeField] float upgradeShootTime = 0.1f;
+    [SerializeField] bool gunCheat = false;
+    [SerializeField] bool healthCheat = false;
 
 
     float targetAngle;
@@ -26,6 +29,11 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         screenBounduary = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+        if(gunCheat)
+        {
+            cheat();
+
+        }
     }
 
     private void OnMove(InputValue Value)
@@ -56,6 +64,7 @@ public class Player : MonoBehaviour
     {
         float rotation = Mathf.MoveTowardsAngle(rb.rotation, targetAngle - 90, rotationSpeed * Time.fixedDeltaTime);
         rb.MoveRotation(rotation);
+
     }
 
     void ResetInvinsibility()
@@ -64,30 +73,34 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") && !invinsible)
+        if(!healthCheat)
         {
-            if (playerHealth <= 1)
+            if (collision.gameObject.CompareTag("Enemy") && !invinsible)
             {
-                Destroy(gameObject);
-            }
-            else
-            {
-                playerHealth--;
-                invinsible = true;
-                Invoke("ResetInvinsibility", invinsibleTime);
-                Debug.Log("Player health: " + playerHealth);
-            }
+                if (playerHealth <= 1)
+                {
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    playerHealth--;
+                    invinsible = true;
+                    Invoke("ResetInvinsibility", invinsibleTime);
+                    Debug.Log("Player health: " + playerHealth);
+                }
 
-        }
-        else if (collision.gameObject.CompareTag("Upgrade"))
-        {
-            Destroy(collision.gameObject);
-            upgrade();
+            }
+            else if (collision.gameObject.CompareTag("Upgrade"))
+            {
+                Destroy(collision.gameObject);
+                upgrade();
+            }
         }
     }
 
     void upgrade()
     {
+        
         Rigidbody2D playerBullet = Instantiate(Bullet, Gun.transform.position, transform.rotation).GetComponent<Rigidbody2D>();
         playerBullet.AddForce(transform.up * (bulletSpeed + moveSpeed), ForceMode2D.Impulse);
         if (upgradeBullets != 100)
@@ -95,7 +108,18 @@ public class Player : MonoBehaviour
             upgradeBullets++;
             Invoke("upgrade", upgradeShootTime);
         }
+        else
+        {
+            upgradeBullets = 0;
+        }
 
+    }
+
+    void cheat()
+    {
+        Rigidbody2D playerBullet = Instantiate(Bullet, Gun.transform.position, transform.rotation).GetComponent<Rigidbody2D>();
+        playerBullet.AddForce(transform.up * (bulletSpeed + moveSpeed), ForceMode2D.Impulse);
+        Invoke("cheat", 0.01f);
     }
 }
 

@@ -9,6 +9,9 @@ public class enemySpawn : MonoBehaviour
     [SerializeField] float maxSpawnTime = 3.0f;
     [SerializeField] float minOlleSpawnTime = 1.0f;
     [SerializeField] float maxOlleSpawnTime = 3.0f;
+    [SerializeField] float minUpgradeSpawnTime = 10.0f;
+    [SerializeField] float maxUpgradeSpawnTime = 15.0f;
+
 
 
 
@@ -83,7 +86,7 @@ public class enemySpawn : MonoBehaviour
 
     void spawnUpgrade()
     {
-        float spawnTime = Random.Range(minSpawnTime, maxSpawnTime);
+        float spawnTime = Random.Range(minUpgradeSpawnTime, maxUpgradeSpawnTime);
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
         spawnPos = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y + spawnDistance);  
         Instantiate(upgradePrefab, spawnPos, transform.rotation);
