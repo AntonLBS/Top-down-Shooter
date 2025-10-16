@@ -5,6 +5,7 @@ public class enemySpawn : MonoBehaviour
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] GameObject ollePrefab;
     [SerializeField] GameObject upgradePrefab;
+    [SerializeField] GameObject ryukPrefab;
     [SerializeField] float minSpawnTime = 1.0f;
     [SerializeField] float maxSpawnTime = 3.0f;
     [SerializeField] float minOlleSpawnTime = 1.0f;
@@ -24,6 +25,7 @@ public class enemySpawn : MonoBehaviour
         spawnEnemy();
         spawnOlle();
         spawnUpgrade();
+        spawnRyuk();
     }
 
     // Update is called once per frame
@@ -91,5 +93,31 @@ public class enemySpawn : MonoBehaviour
         spawnPos = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y + spawnDistance);  
         Instantiate(upgradePrefab, spawnPos, transform.rotation);
         Invoke("spawnUpgrade", spawnTime);
+    }
+
+    void spawnRyuk()
+    {
+        float spawnTime = Random.Range(minSpawnTime, maxSpawnTime);
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+
+        int side = Random.Range(0, 4);
+        switch (side)
+        {
+            case 0:
+                spawnPos = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y + spawnDistance);
+                break;
+            case 1:
+                spawnPos = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), -screenBounds.y - spawnDistance);
+                break;
+            case 2:
+                spawnPos = new Vector2(screenBounds.x + spawnDistance, Random.Range(-screenBounds.y, screenBounds.y));
+                break;
+            case 3:
+                spawnPos = new Vector2(-screenBounds.x - spawnDistance, Random.Range(-screenBounds.y, screenBounds.y));
+                break;
+
+        }
+        Instantiate(ryukPrefab, spawnPos, transform.rotation);
+        Invoke("spawnRyuk", spawnTime);
     }
 }

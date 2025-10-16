@@ -480,6 +480,14 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -2588576923745428814, guid: 5c806238b0de4e04ea630f42db50de10, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -2588576923745428814, guid: 5c806238b0de4e04ea630f42db50de10, type: 3}
+      propertyPath: m_ContactCaptureLayers.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 5514688110046671270, guid: 5c806238b0de4e04ea630f42db50de10, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -620,6 +628,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 158772602889466869, guid: 948361514e406104b8f3c26bdc74c45f, type: 3}
       propertyPath: cheatMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 158772602889466869, guid: 948361514e406104b8f3c26bdc74c45f, type: 3}
+      propertyPath: healthCheat
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 158772602889466869, guid: 948361514e406104b8f3c26bdc74c45f, type: 3}

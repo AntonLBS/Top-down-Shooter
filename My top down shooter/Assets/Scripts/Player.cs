@@ -73,9 +73,7 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(!healthCheat)
-        {
-            if (collision.gameObject.CompareTag("Enemy") && !invinsible)
+            if (collision.gameObject.CompareTag("Enemy") && !invinsible && !healthCheat)
             {
                 if (playerHealth <= 1)
                 {
@@ -95,7 +93,6 @@ public class Player : MonoBehaviour
                 Destroy(collision.gameObject);
                 upgrade();
             }
-        }
     }
 
     void upgrade()
